@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  mid: MyString
+  uid1: MyString
+  uid2: MyString
+  expires_at: 2013-11-09 19:50:15
+
+two:
+  mid: MyString
+  uid1: MyString
+  uid2: MyString
+  expires_at: 2013-11-09 19:50:15

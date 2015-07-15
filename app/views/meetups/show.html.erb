@@ -1,0 +1,67 @@
+    <div class="well">
+        <h1>  </h1>
+    </div>   
+
+    
+    <div class="container">
+          
+      <div class="row">
+        <div class="col-lg-5 col-sm-5" text-center>
+          <% if !@meetup.nil? %>
+            <img src=https://graph.facebook.com/<%= @targetuser.uid %>/picture?width=315&height=249&access_token<%= current_user.oauth_token %> width="380" height="300" class="img-rounded">
+          <% end %>
+        </div>
+        <div class="col-lg-7 col-sm-7">
+          <% if !@meetup.nil? %>
+            <h3>Your Match for the Week:<h3>
+            <h1><%= @targetuser.name %></h1>
+            
+          <% else %>
+            <h3>No match found.<h3>
+          <% end %>
+        </div>
+      </div>
+      
+        <% if !@targetuser.nil? %>
+      <div class="row">
+        <div class="col-lg-8 col-sm-8">
+          <h2>Connect:</h2>
+          
+            <div id="chatbox" style="height:300px;line-height:3em;overflow:scroll;padding:5px;">
+            
+              <% for message in Message.find(:all, :conditions => ["uidto = ? OR uidto = ? AND uidfrom = ? OR uidfrom = ?", current_user.uid, @targetuser.uid, current_user.uid, @targetuser.uid]) %>
+              
+                <% if !message.nil? %>
+                  
+                  <% if message.uidfrom == current_user.uid %>                  
+                    <p><b>You [<%= message.created_at.to_formatted_s(:short) %>]: </b><%= message.body %> </p>                  
+                  <% else %>
+                    <p><b><%=@targetuser.name%> [<%= message.created_at.to_formatted_s(:short) %>]: </b><%= message.body %> </p> 
+                  <% end %>
+                <% end %>
+              <%end%>
+            </div>
+          
+            <%= form_for :message, url: messages_path do |f| %>
+              <p>
+                <%= f.hidden_field :uidfrom, :value => current_user.uid %>
+                <%= f.hidden_field :uidto, :value => @targetuser.uid %>
+                <%= f.label :Chat %><br>
+                <%= f.text_area :body, :style => "width:80%;height:33px;" %>
+              
+                <%= f.submit "Send", class: "btn btn-primary btn-large"%>
+              </p>
+            <% end %>
+            
+        </div>
+         <% end %>
+        <div class="col-lg-4 col-sm-4">
+          <h2>Tips:</h2>
+            <ul>
+              <li>Get to know your new buddy!</li>
+              <li>Set up a hangout (location and time)</li>
+              <li>Add your friend on Facebook</li>
+            </ul>
+        </div>
+      </div>
+    </div>
