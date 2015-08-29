@@ -1,4 +1,4 @@
-# Campus-Meets
+# Campus Meets - http://campusmeets.herokuapp.com
 
 This project was made for a hackathon that my buddies, Aaron Lobo, Hani Mir, Raj Joshi and I had competed in.
 
